@@ -6,6 +6,8 @@ public class InputManager : MonoBehaviour
     PlayerInput controls;
     PlayerInput.MovementActions groundmovement;
 
+    [SerializeField] PlayerMovement movement;
+
     
 
     Vector2 horizontal_input;
@@ -30,7 +32,7 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-        
+        movement.recieveInput(horizontal_input);
     }
 
 }
