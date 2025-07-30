@@ -8,8 +8,9 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] PlayerMovement movement;
 
-    
 
+
+    Vector2 mouseInput;
     Vector2 horizontal_input;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -19,6 +20,10 @@ public class InputManager : MonoBehaviour
 
         groundmovement.Horizontal.performed += ctx => horizontal_input = ctx.ReadValue<Vector2>();
         groundmovement.Jump.performed += _ => movement.onjump_pressed();
+
+        //mouse
+        groundmovement.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();
+        groundmovement.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>();
     }
 
 
@@ -35,6 +40,7 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
         movement.recieveInput(horizontal_input);
+        movement.recieveMouseInput(mouseInput);
     }
 
 }

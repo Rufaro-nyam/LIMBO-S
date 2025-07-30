@@ -567,6 +567,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   jumpheight: 3.5
+  sensetivityx: 24
+  sensetivityy: 0.05
+  playerCamera: {fileID: 330585546}
+  xClamp: 85
 --- !u!114 &515595674
 MonoBehaviour:
   m_ObjectHideFlags: 0

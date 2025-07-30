@@ -14,6 +14,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpheight = 3.5f;
     bool jump;
 
+    //FOR MOUSE
+    [SerializeField] float sensetivityx = 8f;
+    [SerializeField] float sensetivityy = 0.25f;
+    float mousex, mousey;
+
+    [SerializeField] Transform playerCamera;
+    [SerializeField] float xClamp = 85f;
+    float xRotation = 0f;
+    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -44,6 +54,16 @@ public class PlayerMovement : MonoBehaviour
             }
             jump = false;
         }
+
+        //MOUSE
+        transform.Rotate(Vector3.up, mousex * Time.deltaTime);
+
+        xRotation -= mousey;
+        xRotation = Mathf.Clamp(xRotation, -xClamp, xClamp);
+        Vector3 targetRotation = transform.eulerAngles;
+        targetRotation.x = xRotation;
+        playerCamera.eulerAngles = targetRotation;
+        
     }
 
     public void recieveInput(Vector2 _horizontalinput) 
@@ -55,5 +75,11 @@ public class PlayerMovement : MonoBehaviour
     public void onjump_pressed() 
     {
         jump = true;
+    }
+
+    public void recieveMouseInput(Vector2 mouseInput) 
+    {
+        mousex = mouseInput.x * sensetivityx;
+        mousey = mouseInput.y * sensetivityy;
     }
 }
